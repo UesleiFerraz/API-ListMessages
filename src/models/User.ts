@@ -21,10 +21,6 @@ export default class User {
     return this.username;
   }
 
-  public getPassword(): string {
-    return this.password;
-  }
-
   public setUsername(username: string): void {
     this.username = username;
   }
