@@ -95,7 +95,7 @@ class UserController {
       usersWhitoutPassword.push(newUser);
     });
 
-    return res.json({ usersWhitoutPassword });
+    return res.json({ users: usersWhitoutPassword });
   }
 }
 
