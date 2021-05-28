@@ -21,12 +21,12 @@ class UserController {
   }
 
   public deleteUser(req: Request, res: Response) {
-    const { id } = req.params;
-    if (!id) {
+    const { userId } = req.params;
+    if (!userId) {
       return res.json({ error: "id invalid" }).status(400);
     }
 
-    const userExists = users.findIndex(user => user.getId() === id);
+    const userExists = users.findIndex(user => user.getId() === userId);
     if (userExists < 0) {
       return res.json({ error: "user not found" }).status(404);
     }
@@ -36,19 +36,19 @@ class UserController {
   }
 
   public async updateUser(req: Request, res: Response) {
-    const { id } = req.params;
+    const { userId } = req.params;
     const { username, password } = req.body;
-    if (!username || !password || !id) {
+    if (!username || !password || !userId) {
       return res.json({ error: "parameters invalid" }).status(400);
     }
 
-    const userExists = users.findIndex(user => user.getId() === id);
+    const userExists = users.findIndex(user => user.getId() === userId);
     if (userExists < 0) {
       return res.json({ error: "user not found" }).status(404);
     }
 
     const usernameExists = users.find(user => {
-      return user.getUsername() === username && user.getId() !== id;
+      return user.getUsername() === username && user.getId() !== userId;
     });
     if (usernameExists) {
       return res.json({ error: "username already in use" }).status(409);
@@ -58,25 +58,25 @@ class UserController {
     users[userExists].setPassword(await bcrypt.hash(password, 10));
 
     return res.json({
-      userId: users[userExists].getId(),
-      username: users[userExists].getUsername(),
+      userId,
+      username,
       scraps: users[userExists].getScraps(),
     });
   }
 
   public listOneUser(req: Request, res: Response) {
-    const { id } = req.params;
-    if (!id) {
+    const { userId } = req.params;
+    if (!userId) {
       return res.json({ error: "id invalid" }).status(400);
     }
 
-    const userExists = users.find(user => user.getId() === id);
+    const userExists = users.find(user => user.getId() === userId);
     if (!userExists) {
       return res.json({ error: "user not found" }).status(404);
     }
 
     return res.json({
-      userId: userExists.getId(),
+      userId,
       username: userExists.getUsername(),
       scraps: userExists.getScraps(),
     });
