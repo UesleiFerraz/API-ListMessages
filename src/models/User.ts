@@ -25,6 +25,14 @@ export default class User {
     return this.password;
   }
 
+  public setUsername(username: string): void {
+    this.username = username;
+  }
+
+  public setPassword(password: string): void {
+    this.password = password;
+  }
+
   public getScraps(): Scrap[] {
     return this.scraps;
   }

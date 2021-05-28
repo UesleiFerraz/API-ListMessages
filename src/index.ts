@@ -22,8 +22,8 @@ class App {
   }
 }
 
-const app = new App()
+const app = new App().express
 
-app.express.listen(3000, () => {
+app.listen(3000, () => {
     console.log('server on')
 })
