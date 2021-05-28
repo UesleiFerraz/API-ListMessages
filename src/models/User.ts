@@ -38,6 +38,9 @@ export default class User {
   }
 
   public addScrap(scrap: Scrap): void {
-    this.scraps.push(scrap);
+    this.scraps.unshift(scrap);
   }
 }
+
+let users: User[] = [];
+export { users };

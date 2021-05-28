@@ -1,7 +1,7 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
-let users: User[] = [];
+import { users } from '../models/User'
 
 class UserController {
   public async addUser(req: Request, res: Response) {
@@ -39,7 +39,7 @@ class UserController {
     const { userId } = req.params;
     const { username, password } = req.body;
     if (!username || !password || !userId) {
-      return res.json({ error: "parameters invalid" }).status(400);
+      return res.json({ error: "parameter(s) invalid" }).status(400);
     }
 
     const userExists = users.findIndex(user => user.getId() === userId);
