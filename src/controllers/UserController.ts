@@ -1,18 +1,18 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
-import { users } from '../models/User'
+import { users } from "../models/User";
 
 class UserController {
   public async addUser(req: Request, res: Response) {
     const { username, password } = req.body;
     if (!username || !password) {
-      return res.json({ error: "body invalid" }).status(400);
+      return res.status(400).json({ error: "body invalid" });
     }
 
     const usernameExists = users.find(user => user.getUsername() === username);
     if (usernameExists) {
-      return res.json({ error: "username already in use" }).status(409);
+      return res.status(409).json({ error: "username already in use" });
     }
 
     const user = new User(username, await bcrypt.hash(password, 10));
@@ -23,12 +23,12 @@ class UserController {
   public deleteUser(req: Request, res: Response) {
     const { userId } = req.params;
     if (!userId) {
-      return res.json({ error: "id invalid" }).status(400);
+      return res.status(400).json({ error: "id invalid" });
     }
 
     const userExists = users.findIndex(user => user.getId() === userId);
     if (userExists < 0) {
-      return res.json({ error: "user not found" }).status(404);
+      return res.status(404).json({ error: "user not found" });
     }
 
     users.splice(userExists, 1);
@@ -39,19 +39,19 @@ class UserController {
     const { userId } = req.params;
     const { username, password } = req.body;
     if (!username || !password || !userId) {
-      return res.json({ error: "parameter(s) invalid" }).status(400);
+      return res.status(400).json({ error: "parameter(s) invalid" });
     }
 
     const userExists = users.findIndex(user => user.getId() === userId);
     if (userExists < 0) {
-      return res.json({ error: "user not found" }).status(404);
+      return res.status(404).json({ error: "user not found" });
     }
 
     const usernameExists = users.find(user => {
       return user.getUsername() === username && user.getId() !== userId;
     });
     if (usernameExists) {
-      return res.json({ error: "username already in use" }).status(409);
+      return res.status(409).json({ error: "username already in use" });
     }
 
     users[userExists].setUsername(username);
@@ -67,12 +67,12 @@ class UserController {
   public listOneUser(req: Request, res: Response) {
     const { userId } = req.params;
     if (!userId) {
-      return res.json({ error: "id invalid" }).status(400);
+      return res.status(400).json({ error: "id invalid" });
     }
 
     const userExists = users.find(user => user.getId() === userId);
     if (!userExists) {
-      return res.json({ error: "user not found" }).status(404);
+      return res.status(404).json({ error: "user not found" });
     }
 
     return res.json({
