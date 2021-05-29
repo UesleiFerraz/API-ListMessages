@@ -1,22 +1,23 @@
 import { Router } from "express";
 import ScrapController from "./controllers/ScrapController";
 import UserController from "./controllers/UserController";
+import userAuth from "./middlewares/UserAuth";
 
 const routes = Router();
 
-routes.get("/", UserController.listAllUsers);
-routes.get("/users/:userId", UserController.listOneUser);
-routes.get("/users/:userId/scraps", ScrapController.listAllScrapsUser);
-routes.get("/users/:userId/scraps/:scrapId", ScrapController.listOneScrapUser);
+routes.get("/", userAuth, UserController.listAllUsers);
+routes.get("/users/:userId", userAuth, UserController.listOneUser);
+routes.get("/users/:userId/scraps", userAuth, ScrapController.listAllScrapsUser);
+routes.get("/users/:userId/scraps/:scrapId", userAuth, ScrapController.listOneScrapUser);
 
 routes.post("/users", UserController.addUser);
 routes.post("/auth", UserController.login);
-routes.post("/users/:userId/scraps", ScrapController.addScrap);
+routes.post("/users/:userId/scraps", userAuth, ScrapController.addScrap);
 
-routes.put("/users/:userId", UserController.updateUser);
-routes.put("/users/:userId/scraps/:scrapId", ScrapController.updateScrap);
+routes.put("/users/:userId", userAuth, UserController.updateUser);
+routes.put("/users/:userId/scraps/:scrapId", userAuth, ScrapController.updateScrap);
 
-routes.delete("/users/:userId", UserController.deleteUser);
-routes.delete("/users/:userId/scraps/:scrapId", ScrapController.deleteScrap);
+routes.delete("/users/:userId", userAuth, UserController.deleteUser);
+routes.delete("/users/:userId/scraps/:scrapId", userAuth, ScrapController.deleteScrap);
 
 export default routes;
