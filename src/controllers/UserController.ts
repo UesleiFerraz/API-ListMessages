@@ -114,7 +114,7 @@ class UserController {
 
     const secret = process.env.SECRET;
     if (secret) {
-      const token = jwt.sign({ userId: user.getId() }, secret, {
+      const token = jwt.sign({ userIdToken: user.getId() }, secret, {
         expiresIn: "1h",
       });
 
