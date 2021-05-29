@@ -4,13 +4,13 @@ export default class Scrap {
   private id: string;
   private userId: string;
   private description: string;
-  private detais: string;
+  private details: string;
 
-  constructor(description: string, detais: string, userId: string) {
+  constructor(description: string, details: string, userId: string) {
     this.id = uuidGenerator();
     this.userId = userId;
     this.description = description;
-    this.detais = detais;
+    this.details = details;
   }
 
   public getId(): string {
@@ -30,10 +30,10 @@ export default class Scrap {
   }
 
   public getDetais(): string {
-    return this.detais;
+    return this.details;
   }
 
-  public setDetais(detais: string): void {
-    this.detais = detais;
+  public setDetais(details: string): void {
+    this.details = details;
   }
 }

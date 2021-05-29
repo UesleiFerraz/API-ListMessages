@@ -1,7 +1,7 @@
 import { Router } from "express";
 import ScrapController from "./controllers/ScrapController";
 import UserController from "./controllers/UserController";
-import userAuth from "./middlewares/UserAuth";
+import userAuth from "./middlewares/userAuth";
 import userHasSameId from "./middlewares/userHasSameId";
 
 const routes = Router();
