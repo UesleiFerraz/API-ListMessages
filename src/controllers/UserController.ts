@@ -2,6 +2,7 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import { users } from "../models/User";
+import jwt from "jsonwebtoken";
 
 class UserController {
   public async addUser(req: Request, res: Response) {
@@ -96,6 +97,31 @@ class UserController {
     });
 
     return res.json({ users: usersWhitoutPassword });
+  }
+
+  public async login(req: Request, res: Response) {
+    const { username, password } = req.body;
+
+    const user = users.find(user => user.getUsername() === username);
+    if (!user) {
+      return res.status(404).json({ error: "user not found" });
+    }
+
+    const result = await bcrypt.compare(password, user.getPassword());
+    if (!result) {
+      return res.status(406).json({ error: "password wrong" });
+    }
+
+    const secret = process.env.SECRET;
+    if (secret) {
+      const token = jwt.sign({ userId: user.getId() }, secret, {
+        expiresIn: "1h",
+      });
+
+      return res.json({ token });
+    }
+
+    return res.sendStatus(500);
   }
 }
 

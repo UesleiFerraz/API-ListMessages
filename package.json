@@ -8,6 +8,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "uuid": "^8.3.2"
   },
   "scripts": {
@@ -19,6 +20,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^15.6.1",
     "@types/uuid": "^8.3.0",
     "ts-node-dev": "^1.1.6",

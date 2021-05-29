@@ -10,6 +10,7 @@ routes.get("/users/:userId/scraps", ScrapController.listAllScrapsUser);
 routes.get("/users/:userId/scraps/:scrapId", ScrapController.listOneScrapUser);
 
 routes.post("/users", UserController.addUser);
+routes.post("/auth", UserController.login);
 routes.post("/users/:userId/scraps", ScrapController.addScrap);
 
 routes.put("/users/:userId", UserController.updateUser);

@@ -25,6 +25,9 @@ export default class User {
     this.username = username;
   }
 
+  public getPassword(): string {
+    return this.password;
+  }
   public setPassword(password: string): void {
     this.password = password;
   }
