@@ -112,7 +112,7 @@ class UserController {
       return res.status(406).json({ error: "password wrong" });
     }
 
-    const secret = process.env.SECRET;
+    const secret = process.env.SECRET || "7326uahdfa76dt7yasgh";
     if (secret) {
       const token = jwt.sign({ userIdToken: user.getId() }, secret, {
         expiresIn: "1h",

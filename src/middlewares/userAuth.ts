@@ -11,7 +11,7 @@ export default function userAuth(
     return res.status(401).json({ error: "you must authenticate first" });
   }
 
-  const secret = process.env.SECRET;
+  const secret = process.env.SECRET || "7326uahdfa76dt7yasgh";
   if (secret) {
     try {
       jwt.verify(token, secret);
