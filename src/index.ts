@@ -25,7 +25,9 @@ class App {
 }
 
 const app = new App().express
+const port = process.env.PORT || 3000
 
-app.listen(3000, () => {
+
+app.listen(port, () => {
     console.log('server on')
 })
