@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 class UserController {
   public async addUser(req: Request, res: Response) {
     const { username, password } = req.body;
-    if (!username || !password) {
+    if (!username || !password || password.length < 6) {
       return res.status(400).json({ error: "body invalid" });
     }
 
